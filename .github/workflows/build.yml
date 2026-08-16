@@ -1,0 +1,41 @@
+name: Build BedwarsClient
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Set up JDK 8
+      uses: actions/setup-java@v3
+      with:
+        java-version: '8'
+        distribution: 'temurin'
+    
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+    
+    - name: Setup Gradle
+      uses: gradle/gradle-build-action@v2
+    
+    - name: Setup Decomp Workspace
+      run: ./gradlew setupDecompWorkspace --no-daemon
+      continue-on-error: true
+    
+    - name: Build with Gradle
+      run: ./gradlew build --no-daemon
+    
+    - name: Upload JAR Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: BedwarsClient
+        path: build/libs/*.jar
