@@ -1,0 +1,15 @@
+[
+  {
+    "modid": "bedwarsclient",
+    "name": "Bedwars Client",
+    "description": "Professional Bedwars PVP Client for 1.8.9",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "authorList": ["You"],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
